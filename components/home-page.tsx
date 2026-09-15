@@ -82,5 +82,5 @@ export function HomePage({ locale }: { locale: Locale }) {
 }
 
 function lineBreak(value: string) {
-  return value.split("\n").map((line, index) => <span key={line}>{index > 0 && <br />}{line}</span>);
+  return value.split("\n").map((line) => <span key={line}>{line}</span>);
 }
