@@ -16,7 +16,7 @@ export function HomePage({ locale }: { locale: Locale }) {
         <div className="hero-shade" />
         <div className="hero-content page-shell">
           <p className="eyebrow eyebrow--light">{t.heroKicker}</p>
-          <h1>{lineBreak(t.heroTitle)}</h1>
+          <h1 className={`hero-title hero-title--${locale}`}>{lineBreak(t.heroTitle)}</h1>
           <p>{t.heroLine}</p>
           <Link className="button button--light" href={localeHref(locale, "/collection")}>{t.explore}<span aria-hidden="true">↗</span></Link>
         </div>

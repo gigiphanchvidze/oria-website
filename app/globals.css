@@ -9,12 +9,16 @@
   --line: rgba(107, 99, 87, .26);
   --serif: "Cormorant Garamond", Georgia, serif;
   --sans: "Jost", "Helvetica Neue", Arial, sans-serif;
+  --serif-ka: "Noto Serif Georgian", Georgia, serif;
+  --sans-ka: "Noto Sans Georgian", "Helvetica Neue", Arial, sans-serif;
   --shell: min(1340px, calc(100vw - 80px));
 }
 
 * { box-sizing: border-box; }
 html { scroll-behavior: smooth; }
 body { margin: 0; background: var(--ivory); color: var(--charcoal); font-family: var(--sans); font-weight: 300; line-height: 1.65; -webkit-font-smoothing: antialiased; overflow-x: hidden; }
+.locale-ka { font-family: var(--sans-ka); }
+.locale-ka h1, .locale-ka h2, .locale-ka h3 { font-family: var(--serif-ka); font-weight: 500; }
 a { color: inherit; text-decoration: none; }
 button, input { font: inherit; }
 img { user-select: none; }
@@ -58,6 +62,9 @@ h3 { font-size: clamp(2rem, 3.2vw, 3.8rem); }
 .hero-shade { background: linear-gradient(90deg, rgba(30,22,14,.72) 0%, rgba(30,22,14,.38) 43%, rgba(30,22,14,.06) 74%), linear-gradient(to top, rgba(24,19,14,.35), transparent 45%); }
 .hero-content { height: 100%; padding-top: 15vh; padding-bottom: 12vh; display: flex; flex-direction: column; align-items: flex-start; justify-content: center; position: relative; z-index: 2; }
 .hero-content h1 { max-width: 9.5ch; color: var(--white); text-shadow: 0 2px 25px rgba(0,0,0,.2); }
+.hero-title > span { display: block; }
+.hero-title--ka { max-width: none !important; font-size: clamp(3.9rem, 4.9vw, 5.6rem); line-height: 1.06; letter-spacing: -.035em; }
+.hero-title--ka > span { white-space: nowrap; }
 .hero-content > p:not(.eyebrow) { margin-top: 28px; max-width: 48ch; font-size: 1rem; color: rgba(255,253,247,.86); }
 .button { min-height: 52px; padding: 0 24px; display: inline-flex; align-items: center; justify-content: center; gap: 24px; border: 1px solid var(--charcoal); font-size: .68rem; font-weight: 500; letter-spacing: .13em; text-transform: uppercase; transition: background .32s ease, color .32s ease, border-color .32s ease; }
 .button--light { margin-top: 40px; border-color: rgba(255,255,255,.75); color: var(--white); }
@@ -217,6 +224,8 @@ h3 { font-size: clamp(2rem, 3.2vw, 3.8rem); }
   :root { --shell: calc(100vw - 32px); }
   h1 { font-size: clamp(3.65rem, 17vw, 5.8rem); }
   h2 { font-size: clamp(3rem, 14vw, 4.6rem); }
+  .hero-title--ka { max-width: 9.5ch !important; font-size: clamp(3.15rem, 13vw, 4.6rem); line-height: 1.08; }
+  .hero-title--ka > span { white-space: normal; }
   .brand-mark--compact .brand-mark__name { font-size: 1.55rem; }
   .hero-content > p:not(.eyebrow) { font-size: .91rem; max-width: 34ch; }
   .hero-scroll { right: 18px; bottom: 24px; }
