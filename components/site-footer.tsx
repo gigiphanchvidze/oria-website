@@ -1,35 +1,24 @@
 import Link from "next/link";
 import { BrandMark, Emblem } from "./brand-mark";
+import { copy, localeHref, type Locale } from "@/lib/i18n";
 
-export function SiteFooter() {
+export function SiteFooter({ locale }: { locale: Locale }) {
+  const t = copy[locale];
   return (
-    <footer className="site-footer" id="contact">
-      <div className="footer-intro">
-        <Emblem />
-        <BrandMark />
-        <p>ფაიფური, რომელიც სუფრას ისტორიად აქცევს.</p>
-      </div>
-      <div className="footer-columns">
+    <footer className="site-footer">
+      <div className="footer-signature"><Emblem /><BrandMark /><p>{t.footer.line}</p></div>
+      <div className="footer-grid">
         <div>
-          <h2>აღმოაჩინეთ</h2>
-          <Link href="/collection">კოლექცია</Link>
-          <Link href="/#story">ჩვენი ისტორია</Link>
-          <Link href="/#gifting">საჩუქრად</Link>
+          <h2>{t.footer.discover}</h2>
+          <Link href={localeHref(locale, "/collection")}>{t.nav.collection}</Link>
+          <Link href={localeHref(locale, "/story")}>{t.nav.story}</Link>
+          <Link href={localeHref(locale, "/gifting")}>{t.nav.gifting}</Link>
+          <Link href={localeHref(locale, "/journal")}>{t.nav.journal}</Link>
         </div>
-        <div>
-          <h2>კონტაქტი</h2>
-          <p>საკონტაქტო არხები დაემატება ლონჩამდე.</p>
-          <span className="text-link text-link--muted">Instagram · მალე</span>
-        </div>
-        <div>
-          <h2>მაღაზია</h2>
-          <p>ონლაინ შეკვეთები გააქტიურდება მეორე ეტაპზე.</p>
-        </div>
+        <div><h2>{t.footer.contact}</h2><p>{t.footer.contactText}</p><span>Instagram · Coming soon</span></div>
+        <div className="footer-monogram" aria-hidden="true">Ó</div>
       </div>
-      <div className="footer-bottom">
-        <span>© 2026 ÓRIA Fine China</span>
-        <span>საქართველო</span>
-      </div>
+      <div className="footer-bottom"><span>© 2026 ÓRIA · {t.footer.rights}</span><span>{t.footer.country}</span></div>
     </footer>
   );
 }

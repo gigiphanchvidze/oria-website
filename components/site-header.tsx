@@ -1,35 +1,35 @@
 import Link from "next/link";
 import { BrandMark } from "./brand-mark";
+import { copy, localeHref, type Locale } from "@/lib/i18n";
 
-const links = [
-  { href: "/collection", label: "კოლექცია" },
-  { href: "/#story", label: "ჩვენი ისტორია" },
-  { href: "/#gifting", label: "საჩუქრად" },
-  { href: "/#journal", label: "ჟურნალი" },
-  { href: "/#contact", label: "კონტაქტი" },
-];
+export function SiteHeader({ locale, transparent = false, path = "" }: { locale: Locale; transparent?: boolean; path?: string }) {
+  const t = copy[locale];
+  const other = locale === "ka" ? "en" : "ka";
+  const links = [
+    ["/collection", t.nav.collection],
+    ["/story", t.nav.story],
+    ["/gifting", t.nav.gifting],
+    ["/journal", t.nav.journal],
+    ["/contact", t.nav.contact],
+  ] as const;
 
-export function SiteHeader() {
   return (
-    <header className="site-header">
-      <Link className="header-brand" href="/" aria-label="ÓRIA — მთავარი გვერდი">
+    <header className={`site-header${transparent ? " site-header--hero" : ""}`}>
+      <Link className="header-brand" href={localeHref(locale)} aria-label="ÓRIA — home">
         <BrandMark compact />
       </Link>
-      <nav className="desktop-nav" aria-label="მთავარი ნავიგაცია">
-        {links.map((link) => (
-          <Link href={link.href} key={link.href}>{link.label}</Link>
-        ))}
-        <span className="phase-link" aria-label="მაღაზია გაიხსნება მეორე ეტაპზე">მაღაზია <small>II ეტაპი</small></span>
+      <nav className="desktop-nav" aria-label={locale === "ka" ? "მთავარი ნავიგაცია" : "Main navigation"}>
+        {links.map(([href, label]) => <Link href={localeHref(locale, href)} key={href}>{label}</Link>)}
       </nav>
-      <details className="mobile-nav">
-        <summary>მენიუ</summary>
-        <nav aria-label="მობილური ნავიგაცია">
-          {links.map((link) => (
-            <Link href={link.href} key={link.href}>{link.label}</Link>
-          ))}
-          <span>მაღაზია · II ეტაპი</span>
-        </nav>
-      </details>
+      <div className="header-actions">
+        <Link className="language-link" href={localeHref(other, path)} aria-label={locale === "ka" ? "Switch to English" : "ქართულად გადასვლა"}>{t.otherLanguage}</Link>
+        <details className="mobile-nav">
+          <summary aria-label={locale === "ka" ? "მენიუს გახსნა" : "Open menu"}><span /><span /></summary>
+          <nav aria-label={locale === "ka" ? "მობილური ნავიგაცია" : "Mobile navigation"}>
+            {links.map(([href, label], index) => <Link href={localeHref(locale, href)} key={href}><small>0{index + 1}</small>{label}</Link>)}
+          </nav>
+        </details>
+      </div>
     </header>
   );
 }
